@@ -2,25 +2,13 @@ import psycopg2
 from Application.settings import CONNECTION_STRING
 import pandas as pd
 
-class ForeignKey():
-    pass
-
-class CharField():
-    pass
-
-class DateTimeField():
-    pass
-
-class TextField():
-    pass
-
-class IntegerField():
-    pass
-
-class BoolField():
-    pass
 
 class Model():
+    
+    def __init__(self):
+        attrs = [key for key, value in type(self).__dict__.items() if not '__' in key]
+        for attr in attrs:
+            setattr(type(self).__dict__[attr], 'table', 'social_network_{0}'.format(type(self).__name__.lower()))
 
     def create_single(self, **kwargs):
         command = "INSERT INTO social_network_{0}({1}) VALUES (".format(type(self).__name__.lower(), ','.join(kwargs.keys()))
@@ -83,3 +71,6 @@ class Model():
                 except psycopg2.Error as e:
                     return e.pgerror
                 return 'Deleted'
+                
+
+        

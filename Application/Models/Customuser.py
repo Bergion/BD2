@@ -1,11 +1,11 @@
-from Application.manager import Model, CharField, IntegerField, BoolField
-
+from Application.Manager.fields import  CharField, IntegerField, BoolField
+from Application.Manager.manager import  Model
 
 class Customuser(Model):
     id = IntegerField()
-    password = CharField()
+    password = CharField('password')
     is_superuser = BoolField()
-    username = CharField()
-    first_name = CharField()
-    last_name = CharField()
-    email = CharField()
+    username = CharField('username')
+    first_name = CharField('first_name')
+    last_name = CharField('last_name')
+    email = CharField('email')
