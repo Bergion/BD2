@@ -31,4 +31,6 @@ class Delete():
                 print(status)
             if input_result == '2':
                 clear()
-                
+                table = input("Input table name:")
+                status = CRUDController.clear_table(table)
+                print(status)
